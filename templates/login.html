@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block stylesheet %}
+    <link href="{{url_for('static', filename='css/login.css')}}" rel="stylesheet">
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{url_for('static', filename='js/login.js')}}" defer></script>
+{% endblock %}
+
+{% block main %}
+    <div class="wrapper">
+        <section class="form login_form">
+            <form action="/login" method="post">
+                <header>Let's Chat</header>
+                <div class='slogan'>
+                    <p>Login to chat with your Friends.</p>
+                </div>
+                <div class="error-text"></div>
+                <div class="mb-3">
+                    <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="email" name="email" placeholder="Email" type="email" value="{{ email if email else '' }}">
+                    <div class="text-danger" id="email-error">
+                        {% if errors and errors.email %}
+                            {{ errors.email }}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password" value="{{ password if password else '' }}">
+                    <div class="text-danger" id="password-error">
+                        {% if errors and errors.password %}
+                            {{ errors.password }}
+                        {% endif %}
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="submit">Login</button>
+            </form>
+            <p class="register">Don't have an account? <a href="/register">Register here</a></p>
+        </section>
+    </div>
+{% endblock %}

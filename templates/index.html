@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <link  rel="stylesheet" href="{{url_for('static', filename='css/chat.css')}}">
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{url_for('static', filename='js/index.js')}}" defer></script>
+{% endblock %}
+
+{% block main %}
+    <div class='chatcontent'>
+        <div class='all-chats'>
+                <section class="users">
+                    <header class="all-chats-header">Select an User to Start Chat </header>
+                    <div class="mb-3 search">
+                        <input class="form-control mr-sm-2" type='search' name='searchTerm' id="searchInput" placeholder='Enter Name To Search...'>
+                        <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-btn"><i class="fas fa-search"></i></button> -->
+                    </div>
+                    <div class="users-list">
+                        {% if friends %}
+                            {% for friend in friends %}
+                                <div class="friend" data-username="{{ friend.username }}" data-user-id="{{ friend.id }}">
+                                    <div class="friend-profile-picture">
+                                        <img src="{{url_for('static', filename='images/profile_pictures/'+ friend.profile_picture)}}" class="profile-picture" alt='Profile Pic'>
+                                    </div>
+                                    <div class="friend-details">
+                                        <span class="friend-username">{{ friend.username }}</span>
+                                        <span class="friend-status">{{ friend.status }}</span>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </section>
+        </div>
+        <div class="selected-chat">
+            <section class="chatarea">
+                <div class="enc-msg-div">
+                    <a href="#" class="float enc-msg">
+                        <i class="fa fa-lock"></i>&nbsp;&nbsp;Messages are end-to-end Encrypted<br>
+                        No one outside of this chat, not even ADMIN can read them.
+                    </a>
+                </div>
+            </section>
+        </div>        
+    </div>
+{% endblock %}
+
+

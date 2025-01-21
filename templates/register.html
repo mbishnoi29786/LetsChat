@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/register.css')}}">
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{url_for('static', filename='js/register.js')}}" defer></script>
+{% endblock %}
+
+{% block main %}
+    <div class="wrapper">
+        <section class="form register_form">
+            <form action="/register" method="post">
+                <header>Let's Chat</header>
+                <div class='slogan'>
+                    <p>Register to chat with your Friends.</p>
+                </div>
+                    <div class="error-text"></div>
+                <div class="mb-3">
+                    <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text" value="{{ username if username else '' }}">
+                    <div class="text-danger" id="username-error">
+                        {% if errors and errors.username %}
+                            {{ errors.username }}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="email" name="email" placeholder="Email" type="email" value="{{ email if email else '' }}">
+                    <div class="text-danger" id="email-error">
+                        {% if errors and errors.email %}
+                            {{ errors.email }}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password" value="{{ password if password else '' }}">
+                    <div class="text-danger" id="password-error">
+                        {% if errors and errors.password %}
+                            {{ errors.password }}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <input class="form-control mx-auto w-auto" id="confirmation" name="confirmation" placeholder="Confirm Password" type="password" value="{{ confirmation if confirmation else '' }}">
+                    <div class="text-danger" id="confirmation-error">
+                        {% if errors and errors.confirmation %}
+                            {{ errors.confirmation }}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="mb-3 password-requirements">
+                    <ul>
+                        <li id="length-check">At least 8 characters</li>
+                        <li id="lowercase-check">Lowercase letter</li>
+                        <li id="uppercase-check">Uppercase letter</li>
+                        <li id="number-check">Number</li>
+                        <li id="special-check">Special character</li>
+                    </ul>
+                </div>
+                <button class="btn btn-primary" type="submit">Register</button>
+            </form>
+            <p class="login">Already have an account? <a href="/login">Login here</a></p>
+        </section>
+    </div>
+{% endblock %}

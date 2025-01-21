@@ -1,0 +1,12 @@
+<section id="change-profile-picture" class="profile-form-section">
+    <header>Change Profile Picture</header>
+    <form action="/profile" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            {% if user.profile_picture %}
+                <img src="{{ url_for('static', filename='images/profile_pictures/' + user.profile_picture) }}" alt="Profile Picture" class="user-profile-pic">
+            {% endif %}
+            <input class="form-control" type="file" name="profile_picture">
+        </div>
+        <button type="submit" class="btn btn-primary">Change Picture</button>
+    </form>
+</section>

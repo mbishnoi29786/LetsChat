@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}?v=1.0">
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{url_for('static', filename='js/profile.js')}}" defer></script>
+{% endblock %}
+
+{% block main %}
+    {% if user %}
+        <div class="profile-container">
+            <!-- Sidebar with profile options -->
+            <div class="profile-sidebar">
+                <ul>
+                    <li><a href="#" class="profile-option" data-section="edit-profile">Edit Profile</a></li>
+                    <li><a href="#" class="profile-option" data-section="change-profile-picture">Change Profile Picture</a></li>
+                    <li><a href="#" class="profile-option" data-section="change-password">Change Password</a></li>
+                    <li><a href="#" class="profile-option" data-section="delete-account">Delete Account</a></li>
+                </ul>
+            </div>
+
+            <!-- Profile Content (Editable Forms) -->
+            <div id="profile-content" class="profile-content">
+                <!-- Default Profile View -->
+                <section id="profile-overview">
+                    <header>Your Profile</header>
+                    <div class="profile-overview-content">
+                        <img src="{{ url_for('static', filename='images/profile_pictures/' + user.profile_picture) }}" alt="Profile Picture" class="user-profile-pic">
+                        <h2>{{ user.username }}</h2>
+                        <p><strong>Email:</strong> {{ user.email }}</p>
+                        <p><strong>Gender:</strong> {{ user.gender }}</p>
+                        <p><strong>Bio:</strong> {{ user.bio }}</p>
+                        <p><strong>Date of Birth:</strong> {{ user.date_of_birth }}</p>
+                        <p><strong>Account Type:</strong> {{ user.account_type }}</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

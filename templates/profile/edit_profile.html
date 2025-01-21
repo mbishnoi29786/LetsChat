@@ -1,0 +1,34 @@
+{% if user %}
+    <section id="edit-profile" class="profile-form-section">
+        <header>Edit Profile</header>
+        <form action="/profile" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label>Username:</label>
+                <input class="form-control" type="text" name="username" value="{{ user.username }}" required>
+            </div>
+            <div class="mb-3">
+                <label>Gender:</label>
+                <select class="form-control" name="gender">
+                    <option value="male" {% if user.gender == 'male' %}selected{% endif %}>Male</option>
+                    <option value="female" {% if user.gender == 'female' %}selected{% endif %}>Female</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label>Bio:</label>
+                <textarea class="form-control" name="bio">{{ user.bio }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label>Date of Birth:</label>
+                <input class="form-control" type="date" name="date_of_birth" value="{{ user.date_of_birth }}">
+            </div>
+            <div class="mb-3">
+                <label>Account Type:</label>
+                <select class="form-control" name="account_type">
+                    <option value="public" {% if user.account_type == 'public' %}selected{% endif %}>Public</option>
+                    <option value="private" {% if user.account_type == 'private' %}selected{% endif %}>Private</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+    </section>
+{% endif %}

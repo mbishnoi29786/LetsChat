@@ -1,0 +1,234 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa; /* Light background */
+    color: #495057; /* Dark text for contrast */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header and Title */
+h2 {
+    color: #333;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+/* Friends Container */
+.friends-container, .add-friends, .pending-requests {
+    margin-bottom: 30px;
+}
+
+/* Friends List */
+.users-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+}
+
+.friend {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    width: 220px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.friend:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.friend-profile-picture {
+    text-align: center;
+}
+
+.profile-picture {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ddd;
+}
+
+.friend-details {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.friend-username {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.friend-status {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* Button for Adding Friends */
+.add-friend-btn {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.btn-outline-success {
+    border: 1px solid #28a745;
+    color: #28a745;
+}
+
+.btn-outline-success:hover {
+    background-color: #28a745;
+    color: white;
+}
+
+/* Add Friend Form */
+.add-friend-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.add-friend-form .form-control {
+    flex: 1;
+    margin-right: 10px;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.add-friend-form button {
+    border-radius: 20px;
+}
+
+/* Pending Friend Requests */
+.pending-requests ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    gap: 5px;
+}
+
+.request-item {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.request-item img {
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.request-details {
+    display: flex;
+    align-items: center;
+}
+
+.request-info {
+    margin-right: 20px;
+}
+
+.username {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.status {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.request-form button {
+    margin-left: 10px;
+}
+
+/* Message Display */
+#message-div {
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    display: none; /* Start hidden */
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+#message-div.success {
+    background-color: #d4edda; /* Greenish background */
+    border: 1px solid #c3e6cb; /* Light green border */
+    color: #155724; /* Dark green text */
+}
+
+#message-div.error {
+    background-color: #f8d7da; /* Redish background */
+    border: 1px solid #f5c6cb; /* Light red border */
+    color: #721c24; /* Dark red text */
+}
+
+#message-div.show {
+    display: block; /* Make it visible */
+    animation: fadeIn 0.5s ease-in-out; /* Animation for showing the message */
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    margin-top: 40px;
+}
+
+footer form {
+    display: inline-block;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .friend {
+        width: 100%; /* Take full width on smaller screens */
+    }
+
+    .add-friend-form {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .add-friend-form .form-control {
+        margin-right: 0;
+        width: 100%;
+    }
+
+    .add-friend-form button {
+        width: 100%;
+    }
+
+    .users-list {
+        flex-direction: column;
+    }
+}
+
+
+

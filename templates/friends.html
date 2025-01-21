@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+
+{% block title %}Friends{% endblock %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <link href="{{url_for('static', filename='css/friends.css')}}" rel="stylesheet">
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{url_for('static', filename='js/friends.js')}}" defer></script>
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <div class="friends-container">
+            <h2>Your Friends</h2>
+            <div class="users-list">
+                {% if friends %}
+                    {% for friend in friends %}
+                        <div class="friend" data-username="{{ friend.username }}" data-user-id="{{ friend.id }}">
+                            <div class="friend-profile-picture">
+                                <img src="{{url_for('static', filename='images/profile_pictures/'+ friend.profile_picture)}}" class="profile-picture" alt='Profile Pic'>
+                            </div>
+                            <div class="friend-details">
+                                <span class="friend-username">{{ friend.username }}</span>
+                                <span class="friend-status">{{ friend.status }}</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% else %}
+                        <p>You have no friends yet.</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="add-friends">
+            <h2>Find and Add Friends</h2>
+            <div id="message-div"></div>
+            <form class="form-inline add-friend-form" id="add-friend-form">
+                <input type="text" class="form-control mr-sm-2" name="friend_username" placeholder="Friend's Username" required>
+                <button type="submit" class="btn btn-primary">Send Request</button>
+            </form>
+            <h4 class="public-profiles-heading">Users with Public Profiles</h4>
+            <div class="users-list">
+                {% if potential_friends %}
+                    {% for potential_friend in potential_friends %}
+                        <div class="friend" id="potential_friend" data-username="{{ potential_friend.username }}" data-user-id="{{ potential_friend.id }}">
+                            <div class="friend-profile-picture">
+                                <img src="{{url_for('static', filename='images/profile_pictures/'+ potential_friend.profile_picture)}}" class="profile-picture" alt='Profile Pic'>
+                            </div>
+                            <div class="friend-details">
+                                <span class="friend-username">{{ potential_friend.username }}</span>
+                                <span class="friend-status">{{ potential_friend.status }}</span>
+                            </div>
+                            <div class="add-friend-btn">
+                                <button class="btn btn-outline-success my-2 my-sm-0 potential-friend-btn" data-username="{{ potential_friend.username }}">
+                                    <i class="fas fa-user-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="pending-requests">
+            <h2>Pending Friend Requests</h2>
+            {% if requests %}
+                <ul class="requests">
+                    {% for request in requests %}
+                    <li class="request-item">
+                        <div class="request-details">
+                            <!-- Sender's Profile Picture -->
+                            <img src="{{ url_for('static', filename='images/profile_pictures/' + request.profile_picture) }}" class="profile-picture" alt="Profile Pic" width="50" height="50">
+                            
+                            <!-- Sender's Username and Status -->
+                            <div class="request-info">
+                                <span class="username">{{ request.username }}</span>
+                                <span class="status">{{ request.status }}</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Accept and Reject buttons -->
+                        <form action="/friend_requests" method="post" class="request-form">
+                            <input type="text" class="username-input" name="sender_username" value="{{ request.username }}" hidden>
+                            <button type="submit" name="action" value="accept" class="btn btn-success">Accept</button>
+                            <button type="submit" name="action" value="reject" class="btn btn-danger">Reject</button>
+                        </form>
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No pending requests.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,9 @@
+cs50
+Flask
+Flask-Session
+pytz
+requests
+Flask-SocketIO
+python-dotenv
+cryptography
+werkzeug

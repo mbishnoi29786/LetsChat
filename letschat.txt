@@ -1,0 +1,52 @@
+-- To Create sql Database
+sqlite3 letschat.db
+
+
+-- To Create required Tables
+
+-- To store users info
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT UNIQUE NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    profile_picture TEXT DEFAULT 'profile.jpg',
+    gender TEXT CHECK(gender IN ('male', 'female')),
+    bio TEXT,
+    date_of_birth DATE,
+    is_verified BOOLEAN DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_login TIMESTAMP,
+    status TEXT DEFAULT 'offline' CHECK(status IN ('online', 'offline')),
+    account_type TEXT DEFAULT 'public' CHECK(account_type IN ('public', 'private', 'pro', 'deactivated')),
+    account_status TEXT DEFAULT 'active' CHECK(account_status IN ('active', 'suspended', 'deleted', 'deactivated'))
+);
+
+-- To maintain Frienships 
+CREATE TABLE friendships (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    sender_id INTEGER NOT NULL,
+    receiver_id INTEGER NOT NULL,
+    status TEXT DEFAULT 'pending'  NOT NULL CHECK(status IN ('pending', 'accepted', 'rejected', 'blocked')),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    accepted_at TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (sender_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (receiver_id) REFERENCES users(id) ON DELETE CASCADE,
+    UNIQUE(sender_id, receiver_id)
+);
+
+-- To maintain messages
+CREATE TABLE messages (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    sender_id INTEGER NOT NULL,
+    receiver_id INTEGER NOT NULL,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_read BOOLEAN DEFAULT 0, is_delivered BOOLEAN DEFAULT 0,
+    FOREIGN KEY (sender_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (receiver_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Create index for faster loading for message 
+CREATE INDEX idx_sender_receiver ON messages (sender_id, receiver_id);
